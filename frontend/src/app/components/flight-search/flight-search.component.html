@@ -1,0 +1,48 @@
+<div class="container">
+    <h1>Busqueda de Vuelos</h1>
+
+    <form [formGroup]="flightForm">
+        <div class="row m-1 mt-3 pt-4 pb-4 searchForm justify-content-center">
+            <div class="col-lg-4 col-sm">
+                <input type="text" class="form-control" formControlName="origin" placeholder="Origen" aria-label="origin">
+            </div>
+            <div class="col-lg-4 col-sm mt-2">
+                <input type="text" class="form-control" formControlName="destination" placeholder="Destino" aria-label="destination">
+            </div>
+            <div class="col-lg-4 col-sm mt-2">
+                <input type="date" class="form-control" [min]="today | date:'yyy-MM-dd'" formControlName="date" placeholder="Dia de salida" aria-label="date">
+            </div>
+            <div class="col mt-3 formButton">
+                @if(!loading){
+                    <button type="button" 
+                            class="btn btn-outline-primary" 
+                            (click)="searchFlights()" 
+                            [disabled]="!flightForm.valid">
+                                Buscar <i class="bi bi-search"></i>
+                    </button>
+                }@else{
+                    <button class="btn btn-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span role="status">Cargando...</span>
+                    </button>
+                }
+            </div>
+        </div>
+    </form>  
+    @if(errorAlert){
+        <div class="alert alert-danger mt-4" role="alert">
+           {{errorMessage}}
+        </div>
+    }
+    <div class="row m-2">
+        @if(fligths.length > 0){
+            <app-fligth-table [flights]="fligths"></app-fligth-table>
+        }
+    </div>
+    <div class="row m-2">
+        @if(weather.length > 0){
+            <h2>Pronostico del tiempo en {{destination}} </h2>
+            <app-forecast-card [weather]="weather"></app-forecast-card>
+        }
+    </div>
+</div>
