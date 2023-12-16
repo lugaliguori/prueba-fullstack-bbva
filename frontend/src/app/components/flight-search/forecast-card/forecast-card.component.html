@@ -1,0 +1,13 @@
+@for(forecastDay of weather; track $index){
+    <div class="col-lg-2 mb-2 col-sm">
+        <div class="card" >
+            <img [src]="forecastDay.icon" class="card-img-top" alt="icon">
+            <div class="card-body">
+                <h5 class="card-title">{{forecastDay.date}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{forecastDay.condition}}</h6>
+                <p class="card-text">Temperatura: {{forecastDay.mintem}} a {{forecastDay.maxtemp}}</p>
+                <p class="card-text">Humedad: {{forecastDay.humidity}}</p>
+            </div>
+        </div>
+    </div>
+}
